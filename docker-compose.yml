@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - AUTH0_DOMAIN=your-auth0-domain
+      - AUTH0_CLIENT_ID=your-auth0-client-id
+      - AUTH0_CLIENT_SECRET=your-auth0-client-secret
+      - API_IDENTIFIER=your-api-identifier
+      - SECRET_KEY=your-secret-key
+    depends_on:
+      - mongo-db
+
+  mongo-db:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:

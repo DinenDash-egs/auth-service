@@ -1,0 +1,7 @@
+FastAPI
+python-jose
+requests
+auth0-python
+uvicorn
+pydantic
+python-dotenv
