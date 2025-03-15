@@ -8,13 +8,19 @@ class UserModel(BaseModel):
     username: str
     email: EmailStr
     hashed_password: str
+    verification_code: str
+    is_verified: bool = False
     created_at: datetime = datetime.utcnow()
 
     class Config:
-        orm_mode = True
+        from_attributes = True
         json_encoders = {ObjectId: str}
 
 class UserCreate(BaseModel):
     username: str
     email: EmailStr
     password: str
+
+class VerifyEmailRequest(BaseModel):
+    email: EmailStr
+    code: str
