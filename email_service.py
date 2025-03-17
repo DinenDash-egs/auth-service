@@ -14,7 +14,6 @@ def send_verification_email(to_email: str, code: str):
     msg["From"] = EMAIL_ADDRESS
     msg["To"] = to_email
 
-    # html para o email
     html_content = f"""
     <html>
         <body style="font-family: Arial, sans-serif; text-align: center; padding: 20px;">
@@ -23,7 +22,7 @@ def send_verification_email(to_email: str, code: str):
             <div style="display: inline-block; background: #ff6600; color: white; padding: 10px 20px; font-size: 20px; font-weight: bold; border-radius: 5px;">
                 {code}
             </div>
-            <p style="font-size: 14px; color: #777;">x x</p>
+            <p style="font-size: 14px; color: #777;">This code is valid for a limited time.</p>
         </body>
     </html>
     """
