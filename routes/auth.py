@@ -6,6 +6,7 @@ from core.security import hash_password, verify_password, create_access_token, S
 from email_service import send_verification_email
 from datetime import datetime, timedelta
 import jwt
+from bson import ObjectId
 import random
 
 router = APIRouter()
@@ -110,3 +111,25 @@ async def get_user_info(username: str):
         "user_type": user["user_type"],
         "created_at": user["created_at"]
     }
+
+@router.delete("/delete-user/{id}", summary="Delete a User by ID", tags=["User Management"])
+async def delete_user(id: str):
+    """
+    Delete a user by ID.
+
+    - **id**: The unique user ID.
+
+    Returns a success message if the deletion is successful.
+    """
+    if not ObjectId.is_valid(id):
+        raise HTTPException(status_code=400, detail="Invalid user ID format")
+
+    query = {"_id": ObjectId(id)}
+    
+    user = await users_collection.find_one(query)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    await users_collection.delete_one(query)
+
+    return {"message": "User successfully deleted"}
