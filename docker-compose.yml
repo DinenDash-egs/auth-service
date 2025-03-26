@@ -10,11 +10,13 @@ services:
     env_file:
       - .env
     depends_on:
-      - mongo
+      - auth-mongo
+    environment:
+      - MONGO_URI=mongodb://auth-mongo:27017
 
-  mongo:
+  auth-mongo:
     image: "mongo:latest"
-    container_name: "mongo-db"
+    container_name: "auth-mongo"
     ports:
-      - "27017:27017"
+      - "27017:27017" # Can be "27019:27017" to avoid host conflict
     restart: always
