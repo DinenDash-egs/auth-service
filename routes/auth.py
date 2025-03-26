@@ -98,3 +98,7 @@ async def delete_user(id: str):
     await users_collection.delete_one(query)
 
     return {"message": "User successfully deleted"}
+
+@router.get("/ping", tags=["Health Check"])
+async def ping():
+    return {"message": "Authentication service is running"}

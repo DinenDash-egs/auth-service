@@ -18,5 +18,10 @@ services:
     image: "mongo:latest"
     container_name: "auth-mongo"
     ports:
-      - "27019:27017" # Can be "27019:27017" to avoid host conflict
+      - "27019:27017"
     restart: always
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
