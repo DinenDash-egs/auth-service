@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI(
     title="Authentication service",
     version="1.0",
+    root_path="/auth"
 )
 
 # CORS (aceitar requests do front end)
@@ -17,7 +18,7 @@ app.add_middleware(
 )
 
 # Auth route
-app.include_router(auth_router, prefix="/v1/auth")
+app.include_router(auth_router, prefix="/v1")
 
 @app.get("/")
 def root():
