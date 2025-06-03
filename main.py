@@ -11,7 +11,7 @@ app = FastAPI(
 # CORS (aceitar requests do front end)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], 
+    allow_origins=["http://grupo8-egs.deti.ua.pt"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
